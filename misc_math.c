@@ -24,6 +24,9 @@
 
 #include "misc_math.h"
 
+
+// this function is deprecated and will soon be removed
+// please use the BOUND macro instead, it can be cound in misc_math.h
 double bound(const double in, const double min, const double max)
 {
 	float ret = in;
