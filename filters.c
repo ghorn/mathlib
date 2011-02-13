@@ -54,10 +54,10 @@ simple_pid(double y,
            pid_conf_t *c)
 {
   // warn if gains are negative
-  if (c->kp < 0.0) printf("warning: netative p gain in simple_pid\n");
-  if (c->ki < 0.0) printf("warning: netative i gain in simple_pid\n");
-  if (c->kd < 0.0) printf("warning: netative d gain in simple_pid\n");
-  if (c->integral_bound < 0.0) printf("warning: netative integral state bound simple_pid\n");
+  if (c->kp < 0.0) printf("warning: negative p gain in simple_pid\n");
+  if (c->ki < 0.0) printf("warning: negative i gain in simple_pid\n");
+  if (c->kd < 0.0) printf("warning: negative d gain in simple_pid\n");
+  if (c->integral_bound < 0.0) printf("warning: negative integral state bound simple_pid\n");
 
   // errors
   double err = r - y;
