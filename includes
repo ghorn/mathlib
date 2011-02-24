@@ -1,0 +1,17 @@
+AP_PROJECT_ROOT ?= ..
+MATHLIB_DIR ?= AP_PROJECT_ROOT/mathlib
+
+ifneq ($(MATHLIB_INCLUDES),22)
+
+EXTOBJ += $(MATHLIB_DIR)/filters.o \
+	$(MATHLIB_DIR)/misc_math.o \
+	$(MATHLIB_DIR)/quat.o \
+	$(MATHLIB_DIR)/xyz.o \
+	$(MATHLIB_DIR)/spatial_rotations.o \
+
+INCLUDES += -I$(MATHLIB_DIR)
+
+MATHLIB_INCLUDES = 22
+
+endif
+
