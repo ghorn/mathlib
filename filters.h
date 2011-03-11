@@ -26,13 +26,18 @@
 #define __FILTERS_H__
 
 #include "xyz.h"
+#include <ap_types.h>
 
-typedef struct {
-  double kp;
-  double ki;
-  double kd;
-  double integral_bound;
-} pid_conf_t;
+#define PIDCONF_PRINTF(c) printf("%s P: %f I: %f D: %f INTBOUND: %f\n", #c, (c)->kp, (c)->ki, (c)->kd, (c)->integral_bound)
+
+// make this #ifndef #define so that you don't need conftron:
+
+/* typedef struct { */
+/*   double kp; */
+/*   double ki; */
+/*   double kd; */
+/*   double integral_bound; */
+/* } pid_conf_t; */
 
 #ifdef __cplusplus
 extern "C"{
