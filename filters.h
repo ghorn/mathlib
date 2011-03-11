@@ -42,13 +42,13 @@ extern "C"{
 
   void xyz_simple_lowpass(double dt, double tau, xyz_t * state, const xyz_t * const input);
 
-  double simple_pid(double y,
-                    double y_dot,
-                    double r,
-                    double r_dot,
-                    double dt,
+  double simple_pid(const double y,
+                    const double y_dot,
+                    const double r,
+                    const double r_dot,
+                    const double dt,
                     double *i_state,
-                    pid_conf_t *c);
+                    const pid_conf_t * const c);
 
 #ifdef __cplusplus
 }
