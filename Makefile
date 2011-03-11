@@ -11,12 +11,14 @@ CONFTRON_DIR ?= $(AP_PROJECT_DIR)/conftron
 OBJ = $(SRC:%.c=%.o) 
 
 ## Compile pedantically and save pain later
-WARNINGFLAGS ?= -Wall -Wextra -Werror 
+WARNINGFLAGS ?= -Wall -Wextra -Wshadow -Wstrict-prototypes -Werror
 DEBUGFLAGS ?= -g -DDEBUG # -pg to generate profiling information
 FEATUREFLAGS ?= 
 OPTFLAGS ?= 
 INCLUDES ?= 
 LDFLAGS ?= -lm
+
+OPTFLAGS += -O3
 
 ## thanks so much, Steve Jobs.  
 ifeq ($(UNAME),Darwin)
@@ -25,7 +27,7 @@ ifeq ($(UNAME),Darwin)
 	INCLUDES += -I/opt/local/include
 	INCLUDES += -isystem /usr/local/include
 else
-	OPTFLAGS += -march=native -O3
+	OPTFLAGS += -march=native
 endif
 
 include $(CONFTRON_DIR)/includes
