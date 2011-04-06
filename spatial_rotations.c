@@ -173,3 +173,29 @@ rot_vec_by_quat_b2a(xyz_t *vec_a, const quat_t * const q_a2b, const xyz_t * cons
   dcm_of_quat_a2b(R_a2b,q_a2b);
   rot_vec_by_dcm_b2a(vec_a, R_a2b, vec_b);	
 }
+
+void
+get_wind_angles(const quat_t * const q_n2b,
+                const xyz_t * const v_bn_b,
+                const xyz_t * const wind_in_ned,
+                double * alpha,
+                double * beta,
+                double * v_T)
+{
+  xyz_t wind_in_body;
+  rot_vec_by_quat_a2b( &wind_in_body, q_n2b, wind_in_ned);
+  xyz_t v_rel;
+  xyz_diff( &v_rel, v_bn_b, &wind_in_body);
+  
+  *v_T = xyz_norm(&v_rel) + 1e-12;
+  if (v_rel.x >= 0)
+    *beta  =  asin ( v_rel.y / *v_T );
+  else{
+    *beta  = -asin ( v_rel.y / *v_T );
+    if (v_rel.y >= 0)
+      *beta += M_PI;
+    else
+      *beta -= M_PI;
+  }
+  *alpha =  atan2( v_rel.z, v_rel.x );
+}
