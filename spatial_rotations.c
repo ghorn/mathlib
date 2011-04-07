@@ -23,7 +23,9 @@
  * Math library spatial rotation related operations.
  */
 
+#include <stdlib.h>
 #include <math.h>
+
 #include "spatial_rotations.h"
 
 /************** library functions *****************/
@@ -175,27 +177,48 @@ rot_vec_by_quat_b2a(xyz_t *vec_a, const quat_t * const q_a2b, const xyz_t * cons
 }
 
 void
-get_wind_angles(const quat_t * const q_n2b,
-                const xyz_t * const v_bn_b,
-                const xyz_t * const wind_in_ned,
-                double * alpha,
-                double * beta,
-                double * v_T)
+get_wind_angles_from_v_bw_b(double * alpha, double * beta, double * airspeed, const xyz_t * const v_bw_b)
 {
-  xyz_t wind_in_body;
-  rot_vec_by_quat_a2b( &wind_in_body, q_n2b, wind_in_ned);
-  xyz_t v_rel;
-  xyz_diff( &v_rel, v_bn_b, &wind_in_body);
-  
-  *v_T = xyz_norm(&v_rel) + 1e-12;
-  if (v_rel.x >= 0)
-    *beta  =  asin ( v_rel.y / *v_T );
-  else{
-    *beta  = -asin ( v_rel.y / *v_T );
-    if (v_rel.y >= 0)
-      *beta += M_PI;
+  double airspeed_internal_memory;
+  double * airspeed_internal = &airspeed_internal_memory;
+
+  if (airspeed != NULL)
+    *airspeed = xyz_norm(v_bw_b) + 1e-12;
+
+  if (beta != NULL)
+  {
+    if (airspeed != NULL)
+      airspeed_internal = airspeed;
     else
-      *beta -= M_PI;
+      *airspeed_internal = xyz_norm(v_bw_b) + 1e-12;
+
+    if (v_bw_b->x >= 0)
+      *beta  =  asin ( v_bw_b->y / *airspeed_internal );
+    else{
+      *beta  = -asin ( v_bw_b->y / *airspeed_internal );
+      if (v_bw_b->y >= 0)
+        *beta += M_PI;
+      else
+        *beta -= M_PI;
+    }
   }
-  *alpha =  atan2( v_rel.z, v_rel.x );
+
+  if (alpha != NULL)
+    *alpha =  atan2( v_bw_b->z, v_bw_b->x );
+}
+
+void
+get_wind_angles( double * alpha,
+                 double * beta,
+                 double * airspeed,
+                 const quat_t * const q_n2b,
+                 const xyz_t * const v_bn_b,
+                 const xyz_t * const v_wn_n)
+{
+  xyz_t v_wn_b;
+  rot_vec_by_quat_a2b( &v_wn_b, q_n2b, v_wn_n);
+  xyz_t v_bw_b;
+  xyz_diff( &v_bw_b, v_bn_b, &v_wn_b);
+
+  get_wind_angles_from_v_bw_b( alpha, beta, airspeed, &v_bw_b );
 }

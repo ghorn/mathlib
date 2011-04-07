@@ -50,12 +50,13 @@ extern "C"{
   void rot_vec_by_dcm_b2a(xyz_t *vec_a, const double * const R_a2b, const xyz_t * const vec_b);
   void rot_vec_by_quat_a2b(xyz_t *vec_b, const quat_t * const q_a2b, const xyz_t * const vec_a);
   void rot_vec_by_quat_b2a(xyz_t *vec_a, const quat_t * const q_a2b, const xyz_t * const vec_b);
-  void get_wind_angles(const quat_t * const q_n2b,
-                       const xyz_t * const v_bn_b,
-                       const xyz_t * const wind_in_ned,
-                       double * alpha,
-                       double * beta,
-                       double * v_T);
+  void get_wind_angles_from_v_bw_b(double * alpha, double * beta, double * airspeed, const xyz_t * const v_bw_b);
+  void get_wind_angles( double * alpha,
+                        double * beta,
+                        double * airspeed,
+                        const quat_t * const q_n2b,
+                        const xyz_t * const v_bn_b,
+                        const xyz_t * const v_wn_n);
 
 #ifdef __cplusplus
 }
