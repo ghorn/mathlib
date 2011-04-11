@@ -68,6 +68,17 @@ xyz_sum(xyz_t *sum, const xyz_t * const a, const xyz_t * const b)
   sum->z = a->z + b->z;
 }
 
+// sum = sum*sum_scale + a*a_scale + b*b_scale
+void
+xyz_sum_scale(xyz_t *sum, const double sum_scale,
+              const xyz_t * const a, const double a_scale,
+              const xyz_t * const b, const double b_scale)
+{
+  sum->x = sum->x*sum_scale + a->x*a_scale + b->x*b_scale;
+  sum->y = sum->y*sum_scale + a->y*a_scale + b->y*b_scale;
+  sum->z = sum->z*sum_scale + a->z*a_scale + b->z*b_scale;
+}
+
 // c = a (cross) b
 void
 xyz_cross( xyz_t * c, const xyz_t * const a, const xyz_t * const b)

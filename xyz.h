@@ -44,6 +44,9 @@ extern "C"{
   void xyz_set( xyz_t * xyz, double x, double y, double z);
   void xyz_diff(xyz_t *diff, const xyz_t * const a, const xyz_t * const b);
   void xyz_sum(xyz_t *sum, const xyz_t * const a, const xyz_t * const b);
+  void xyz_sum_scale(xyz_t *sum, const double sum_scale,
+                     const xyz_t * const a, const double a_scale,
+                     const xyz_t * const b, const double b_scale);
   void xyz_cross( xyz_t * c, const xyz_t * const a, const xyz_t * const b);
   double xyz_dot( const xyz_t * const a, const xyz_t * const b);
   double xyz_norm_squared( const xyz_t * const vec);
