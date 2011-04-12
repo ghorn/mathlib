@@ -54,6 +54,7 @@ extern "C"{
   void get_wind_angles( double * alpha,
                         double * beta,
                         double * airspeed,
+                        xyz_t * v_bw_b_out,
                         const quat_t * const q_n2b,
                         const xyz_t * const v_bn_b,
                         const xyz_t * const v_wn_n);

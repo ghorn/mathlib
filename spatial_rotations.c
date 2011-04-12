@@ -211,6 +211,7 @@ void
 get_wind_angles( double * alpha,
                  double * beta,
                  double * airspeed,
+                 xyz_t * v_bw_b_out,
                  const quat_t * const q_n2b,
                  const xyz_t * const v_bn_b,
                  const xyz_t * const v_wn_n)
@@ -221,4 +222,7 @@ get_wind_angles( double * alpha,
   xyz_diff( &v_bw_b, v_bn_b, &v_wn_b);
 
   get_wind_angles_from_v_bw_b( alpha, beta, airspeed, &v_bw_b );
+
+  if (v_bw_b_out != NULL)
+    xyz_memcpy( v_bw_b_out, &v_bw_b);
 }
