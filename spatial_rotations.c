@@ -28,8 +28,6 @@
 
 #include "spatial_rotations.h"
 
-/************** library functions *****************/
-
 void 
 rotate_xyz_about_x( xyz_t * b, const xyz_t * const a, const double rot_angle)
 {

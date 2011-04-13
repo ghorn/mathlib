@@ -26,11 +26,14 @@
 #ifndef __XYZ_H__
 #define __XYZ_H__
 
-#include <ap_types.h>
-
-//#ifndef xyz_t
-//typedef struct xyz_t { double x; double y; double z;} xyz_t;
-//#endif
+#ifndef XYZ_T
+#define XYZ_T
+typedef struct xyz_t {
+  double x;
+  double y;
+  double z;
+} xyz_t;
+#endif // XYZ_T
 
 #define xyz_printf(xyz_in) printf(#xyz_in ": [% .6f, % .6f, % .6f]\n",\
                                   (xyz_in)->x, (xyz_in)->y, (xyz_in)->z)

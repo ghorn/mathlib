@@ -29,10 +29,14 @@
 #include "quat.h"
 #include "xyz.h"
 
-#include <ap_types.h>
-//#ifndef euler_t
-//typedef struct euler_t {double roll; double pitch; double yaw;} euler_t;
-//#endif
+#ifndef EULER_T
+#define EULER_T
+typedef struct euler_t {
+  double roll;
+  double pitch;
+  double yaw;
+} euler_t;
+#endif // EULER_T
 
 #ifdef __cplusplus
 extern "C"{
