@@ -26,11 +26,15 @@
 #ifndef __QUAT_H__
 #define __QUAT_H__
 
-#include <ap_types.h>
-
-//#ifndef quat_t
-//typedef struct quat_t {double q0; double q1; double q2; double q3;} quat_t; 
-//#endif
+#ifndef QUAT_T
+#define QUAT_T
+typedef struct quat_t {
+  double q0;
+  double q1;
+  double q2;
+  double q3;
+} quat_t;
+#endif // QUAT_T
 
 #define quat_printf(quat_in) printf(#quat_in ": [% .6f, % .6f, % .6f, % .6f]\n",\
                                     (quat_in)->q0, (quat_in)->q1, (quat_in)->q2, (quat_in)->q3)

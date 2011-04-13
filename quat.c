@@ -28,7 +28,6 @@
 
 #include "quat.h"
 
-
 void
 quat_memcpy( quat_t * q1, const quat_t * const q0)
 {
