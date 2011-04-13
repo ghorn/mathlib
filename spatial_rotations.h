@@ -58,6 +58,7 @@ extern "C"{
                         const quat_t * const q_n2b,
                         const xyz_t * const v_bn_b,
                         const xyz_t * const v_wn_n);
+  void v_bw_b_from_wind_angles( xyz_t * v_bw_b, const double alpha, const double beta, const double airspeed);
 
 #ifdef __cplusplus
 }

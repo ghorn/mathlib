@@ -192,15 +192,7 @@ get_wind_angles_from_v_bw_b(double * alpha, double * beta, double * airspeed, co
     else
       *airspeed_internal = xyz_norm(v_bw_b) + 1e-12;
 
-    if (v_bw_b->x >= 0)
-      *beta  =  asin ( v_bw_b->y / *airspeed_internal );
-    else{
-      *beta  = -asin ( v_bw_b->y / *airspeed_internal );
-      if (v_bw_b->y >= 0)
-        *beta += M_PI;
-      else
-        *beta -= M_PI;
-    }
+    *beta  =  asin ( v_bw_b->y / *airspeed_internal );
   }
 
   if (alpha != NULL)
@@ -225,4 +217,12 @@ get_wind_angles( double * alpha,
 
   if (v_bw_b_out != NULL)
     xyz_memcpy( v_bw_b_out, &v_bw_b);
+}
+
+void
+v_bw_b_from_wind_angles( xyz_t * v_bw_b, const double alpha, const double beta, const double airspeed)
+{
+  v_bw_b->x = airspeed*cos(alpha)*cos(beta);
+  v_bw_b->y = airspeed*sin(beta);
+  v_bw_b->z = airspeed*cos(beta)*sin(alpha);
 }
