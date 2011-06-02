@@ -68,9 +68,9 @@ void
 quat_mult(quat_t *q_out, const quat_t * const qa, const quat_t * const qb)
 {
   q_out->q0 = qa->q0*qb->q0 - qa->q1*qb->q1 - qa->q2*qb->q2 - qa->q3*qb->q3;
-  q_out->q1 = qa->q0*qb->q1 + qb->q0*qa->q1 + qa->q2*qb->q3 - qa->q3*qb->q2;
-  q_out->q2 = qa->q0*qb->q2 + qb->q0*qa->q2 - qa->q1*qb->q3 + qa->q3*qb->q1;
-  q_out->q3 = qa->q0*qb->q3 + qb->q0*qa->q3 + qa->q1*qb->q2 - qa->q2*qb->q1;
+  q_out->q1 = qa->q0*qb->q1 + qa->q1*qb->q0 + qa->q2*qb->q3 - qa->q3*qb->q2;
+  q_out->q2 = qa->q0*qb->q2 - qa->q1*qb->q3 + qa->q2*qb->q0 + qa->q3*qb->q1;
+  q_out->q3 = qa->q0*qb->q3 + qa->q1*qb->q2 - qa->q2*qb->q1 + qa->q3*qb->q0;
 
   if (q_out->q0 < 0){
     q_out->q0 = -q_out->q0;
